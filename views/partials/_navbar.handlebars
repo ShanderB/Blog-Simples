@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Blog do NOde</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -13,17 +14,18 @@
         <a class="nav-link" href="/categorias">Categoria</a>
       </li>
       {{!-- vem a variável global "user" do "index.js" --}}
-     {{#if user}}  
-     {{else}}
+      {{#if user}}
       <li class="nav-item">
-        <a class="nav-link disabled" href="/usuarios/login" tabindex="-1" aria-disabled="true">Login</a>
+        <a class="nav-link" href="/usuarios/logout" tabindex="-1" aria-disabled="true">Logout</a>
       </li>
-
+      {{else}}
       <li class="nav-item">
-        <a class="nav-link disabled" href="/usuarios/registro" tabindex="-1" aria-disabled="true">Registro</a>
+        <a class="nav-link" href="/usuarios/login" tabindex="-1" aria-disabled="true">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/usuarios/registro" tabindex="-1" aria-disabled="true">Registro</a>
       </li>
       {{/if}}
     </ul>
-    
   </div>
 </nav>
