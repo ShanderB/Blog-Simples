@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 require("../models/Usuario");
 const Usuario = mongoose.model("usuarios");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
+
+
+
 
 router.get("/registro", (req, res) => {
     res.render("usuarios/registro");
@@ -33,8 +37,8 @@ router.post("/registro", (req, res) => {
     if (erros.length > 0) {
         res.render("/usuarios/registro", { erros: erros })
     } else {
-        Usuario.findOne({email: req.body.email}).then((usuario) => {
-            if(usuario){
+        Usuario.findOne({ email: req.body.email }).then((usuario) => {
+            if (usuario) {
                 req.flash("error_msg", "Já existe email cadastrado.");
                 res.redirect("/usuarios/registro")
             } else {
@@ -46,7 +50,7 @@ router.post("/registro", (req, res) => {
 
                 bcrypt.genSalt(10, (erro, salt) => {
                     bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
-                        if(erro){
+                        if (erro) {
                             req.flash("error_msg", "Erro ao gerar o hash. (usuario.js - linha 50)");
                             res.redirect("/usuarios/registro");
                         }
@@ -76,6 +80,12 @@ router.get("/login", (req, res) => {
     res.render("usuarios/login");
 });
 
-
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/usuarios/login",
+        failureFlash: true
+    })(req, res, next)
+})
 
 module.exports = router;

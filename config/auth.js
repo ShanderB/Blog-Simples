@@ -6,17 +6,17 @@ const bcrypt = require("bcryptjs");
 require("../models/Usuario");
 const Usuario = mongoose.model("usuarios");
 
-module.exports = function(passport){
-    passport.use(new localStrategy({usernameField: "email"}, (email, senha, done) => {
-        Usuario.findOne({email: email}).then((usuario) => {
-            if(!usuario){
-                return done(null, false, {message: "Conta Inexistente"});
+module.exports = function (passport) {                            //Vai pegar no "login.handlebars" o campo "email" e "senha". Lá ele puxa a tag "name"
+    passport.use(new localStrategy({ usernameField: "email", passwordField: "senha" }, (email, senha, done) => {
+        Usuario.findOne({ email: email }).then((usuario) => {
+            if (!usuario) {
+                return done(null, false, { message: "Conta Inexistente" });
             }
             bcrypt.compare(senha, usuario.senha, (erro, batem) => {
-                if(batem){
-                    return done(null, user);
+                if (batem) {
+                    return done(null, usuario);
                 } else {
-                    return done(null, false, {message: "senha incorreta"});
+                    return done(null, false, { message: "senha incorreta" });
                 }
             })
         })
@@ -26,7 +26,7 @@ module.exports = function(passport){
     })
 
     passport.deserializeUser((id, done) => {
-        User.findById(id, (err, usuario) => {
+        Usuario.findById(id, (err, usuario) => {
             done(err, usuario);
         })
     })
