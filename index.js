@@ -39,10 +39,10 @@ app.use((req, res, next) => {
 
 
 
-//parser
+//parser. Vai "segurar a informação no middleware" para ser utilizado em outros pontos do programa.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//handlebars
+//handlebars 
 app.engine("handlebars", handlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -57,9 +57,7 @@ mongoose.connect("mongodb://localhost/blogapp", { useNewUrlParser: true, useUnif
 
 //Public
 app.use(express.static(path.join(__dirname + "/public/")));
-
 app.use((req, res, next) => {
-    console.log("Passando pelo MiddleWere");
     next();
 })
 

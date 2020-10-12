@@ -7,7 +7,7 @@ const Categoria = mongoose.model("categorias");
 const Postagem = mongoose.model("postagens");
 const {eAdmin} = require("../helper/eAdmin"); //dentro do JS "eAdmin", vou pegar apenas a função "eAdmin". Vai ser criado a variavel "eAdmin".
 
-router.get("/",  eAdmin, (req, res) => {
+router.get("/", eAdmin, (req, res) => {
     res.render("C:/Users/Asknorvs/Desktop/Programas/Programação/Class/Node/aProjeto/views/admin/admin");
 });
 
@@ -15,7 +15,7 @@ router.get("/posts", (req, res) => {
     res.send("Post page")
 });
 
-router.get("/categorias", (req, res) => {
+router.get("/categorias", eAdmin, (req, res) => {
     Categoria.find().sort({ date: "desc" }).then((categorias) => {
         res.render("admin/categorias", { categorias: categorias.map(Categoria => Categoria.toJSON()) })
     }).catch((err) => {
