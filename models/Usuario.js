@@ -2,20 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Usuario = new Schema({
-    eAdmin:{
+    eAdmin: {
         type: Number,
-        default: 0,
-        required: true
+        default: 1,
     },
-    nome:{
+    nome: {
         type: String,
         require: true,
     },
-    email:{
+    email: {
         type: String,
         require: true
     },
-    senha:{
+    senha: {
         type: String,
         require: true
     }

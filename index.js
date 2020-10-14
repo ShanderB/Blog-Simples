@@ -96,7 +96,7 @@ app.get("/404", (req, res) => {
 app.get("/categorias", (req, res) => {
     Categoria.find().lean().then((categorias) => {
         res.render("categorias/index", { categorias: categorias })
-    }).catch(err => {
+    }).catch((err) => {
         req.flash("error_msg", "Erro ao listar categorias")
         res.redirect("/")
     })
