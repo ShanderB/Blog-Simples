@@ -34,6 +34,12 @@ router.post("/registro", (req, res) => {
         erros.push({ texto: "Senhas não conferem" });
     }
 
+    if (req.body.eAdmin != 0) {
+        if (req.body.eAdmin != 1){
+            erros.push({ texto: "Campo 'eAdmin' não confere." });
+        }
+    }
+
     if (erros.length > 0) {
         res.render("/usuarios/registro", { erros: erros })
     } else {
@@ -45,7 +51,8 @@ router.post("/registro", (req, res) => {
                 const novoUsuario = new Usuario({
                     nome: req.body.nome,
                     senha: req.body.senha,
-                    email: req.body.email
+                    email: req.body.email,
+                    eAdmin: req.body.eAdmin
 
                 })
 
