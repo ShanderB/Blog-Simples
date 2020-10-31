@@ -1,12 +1,26 @@
 <div class="jumbotron">
   <h1 class="display-4">Bem vindo ao blog Node!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <p class="lead">Blog simples para aprender a mexer com diversas frameworks.</p>
+
+  {{#if user}}
+  <a>Você está logado como </a><a style="color:red;">admin</a>
+  <a class="nav-link" href="/admin/categorias">Criar Categoria</a>
+  <a class="nav-link" href="/admin/postagens">Criar Postagem</a>
+
+  {{else}}
+
+  <p>Bem vindo</p>
+  <a class="nav-link" href="/categorias">Ver Categorias</a>
+
+  {{/if}}
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Criar Conta</a>
+  <p>Header apenas para teste.</p>
+  <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Criar Conta</a>
 </div>
 
-<hr>    
+
+
+<hr>
 
 <h2>Postagens Recentes</h2>
 
@@ -14,15 +28,15 @@
 {{#each postagens}}
 
 <div class="card mt-4">
-    <div class="card-body mt">
-        
-        <h3>{{titulo}}</h3>
-        <p>{{descricao}}</p>
-        <a href="/postagem/{{slug}}"><button class="btn btn-success">Leia Mais</button></a>
-<hr>
-        <small>Data de Publicação: {{data}}</small>
-        
-    </div>
+  <div class="card-body mt">
+
+    <h3>{{titulo}}</h3>
+    <p>{{descricao}}</p>
+    <a href="/postagem/{{slug}}"><button class="btn btn-success">Leia Mais</button></a>
+    <hr>
+    <small>Data de Publicação: {{data}}</small>
+
+  </div>
 </div>
 {{else}}
 <h5>Nem uma postagem</h5>
