@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const Usuario = new Schema({
     eAdmin: {
         type: Number,
-        default: 1,
     },
     nome: {
         type: String,
